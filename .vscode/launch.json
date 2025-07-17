@@ -12,7 +12,7 @@
             "program": "${fileDirname}",
         },
         {
-            "name": "Launch function",
+            "name": "Launch full",
             "type": "go",
             "request": "launch",
             "mode": "debug",

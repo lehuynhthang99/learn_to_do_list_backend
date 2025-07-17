@@ -16,17 +16,12 @@ func CreateUser(c echo.Context) error {
 	user := new(models.User)
 	err := customContext.Bind(&user)
 	if err != nil {
-		return customContext.JSON(http.StatusBadRequest, echo.Map{
-			"error":   "Invalid input",
-			"message": err.Error(),
-		})
+		return customContext.ErrorWithCustomCode(http.StatusBadRequest, middleware.InvalidInput, err.Error())
 	}
 
 	result := config.DB.Create(&user)
 	if result.Error != nil {
-		return customContext.JSON(http.StatusInternalServerError, echo.Map{
-			"error": result.Error.Error(),
-		})
+		return customContext.ErrorWithCustomCode(http.StatusBadRequest, middleware.DatabaseError, result.Error.Error())
 	}
 
 	return customContext.JSON(http.StatusCreated, user)

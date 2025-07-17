@@ -1,9 +1,8 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
-
-	"github.com/lehuynhthang99/learn_to_do_list_backend/middleware"
+	"github.com/lehuynhthang99/learn_to_do_list_backend/config"
+	"github.com/lehuynhthang99/learn_to_do_list_backend/routes"
 )
 
 const (
@@ -12,11 +11,9 @@ const (
 )
 
 func main() {
-	e := echo.New()
+	config.ConnectDatabase()
 
-	//Add middleware
-	e.Use(middleware.LoggerMiddleware)
-	e.Use(middleware.AuthMiddleWare)
+	e := routes.RegisterRoutes()
 
 	//Start server
 	e.Logger.Fatal(e.StartTLS(":1323", certificate_path, private_key_path))

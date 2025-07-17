@@ -17,7 +17,7 @@ const (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	dbConfig := GetConfig()
+	dbConfig := getConfig()
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=%s&loc=%s",
 		dbConfig.DBUser,
 		dbConfig.DBPassword,

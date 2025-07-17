@@ -7,3 +7,7 @@ type User struct {
 	Name      string    `json:"name"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
+func (User) TableName() string {
+	return "users_tb"
+}
